@@ -18,12 +18,13 @@ public class ShowService {
     private ShowRepository showRepository;
 
     public Show create(Show show){
-        Optional<Show> theaterExists = showRepository.findById(show.getShowId());
-        if(theaterExists.isPresent()){
-            return null;
-        }else{
-            return showRepository.save(show);
-        }
+//        Optional<Show> theaterExists = showRepository.findById(show.getShowId());
+//        if(theaterExists.isPresent()){
+//            return null;
+//        }else{
+//            return showRepository.save(show);
+//        }
+        return showRepository.save(show);
     }
 
     public Show findById(UUID uuid){
