@@ -1,0 +1,10 @@
+select * from public.show ;
+
+
+select * from public.show where title like 'Avtaar2';
+
+select * from public.screen_show where show_id = '826b0dd1-9f71-4063-920f-24256ee7965d' ;
+
+select * from public.screen_show where show_id = (select show_id from public.show where title like 'Avtaar2');
+
+select * from public.theater where theater_id = '0cc16657-bbac-428b-b6cd-6dec97023bef';
