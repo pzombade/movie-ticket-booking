@@ -4,15 +4,19 @@ package com.publicissapient.movieticketbooking.service;
 import com.publicissapient.movieticketbooking.entity.ScreenShow;
 
 import com.publicissapient.movieticketbooking.repository.ScreenShowRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
+@Slf4j
 public class ScreenShowService {
+
 
     @Autowired
     private ScreenShowRepository screenShowRepository;
@@ -62,4 +66,31 @@ public class ScreenShowService {
             return null;
         }
     }
+
+    public List getRunningShows(String title, String zip){
+//        String query =
+//               "select   screen_show.*, sh.*, sc.*, t.* from public.screen_show inner join show sh on sh.show_id = screen_show.show_id inner join screen sc on sc.screen_id = screen_show.screen_id inner join theater t on t.theater_id = sc.theater_id where screen_show.show_date_time > NOW() and t.zip = '111111' and sh.title not like 'Avtaar2' ;"; // and screen_show.show_date_time >= '2023-01-20'::date AND screen_show.show_date_time < ('2023-01-20'::date + '1 day'::interval)
+        String query =
+                "select t.name, screen_show.show_date_time from public.screen_show inner join show sh on sh.show_id = screen_show.show_id inner join screen sc on sc.screen_id = screen_show.screen_id inner join theater t on t.theater_id = sc.theater_id where screen_show.show_date_time > NOW() and t.zip = :zip and sh.title not like :title"; // and screen_show.show_date_time >= '2023-01-20'::date AND screen_show.show_date_time < ('2023-01-20'::date + '1 day'::interval)
+
+        Query q = em.createNativeQuery(query);
+        q.setParameter("title",title);
+        q.setParameter("zip", zip);
+        List l = q.getResultList();
+
+
+        List result = new ArrayList();
+        for(Object p:l){
+            Map<String,String> map = new HashMap<>();
+            map.put("name",((Object[])p)[0].toString() );
+            map.put("zip",((Object[])p)[1].toString() );
+            log.info("Theater {} at {}",((Object[])p)[0],((Object[])p)[1]);
+            result.add(map);
+        }
+
+        return result;
+    }
+
+    @PersistenceContext
+    private EntityManager em;
 }
