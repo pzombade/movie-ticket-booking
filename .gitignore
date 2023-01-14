@@ -32,3 +32,12 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/resources/application.properties
+/src/main/resources/application-supa.properties
+/bk2
+/bk3.tar
+/bkup1
+/data.sql
+/data2.sql
+/data3.sql
+/data4.sql
+/ec2-manual-deployment.txt
