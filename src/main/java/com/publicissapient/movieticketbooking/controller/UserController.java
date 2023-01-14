@@ -1,7 +1,10 @@
 package com.publicissapient.movieticketbooking.controller;
 
+import com.publicissapient.movieticketbooking.UserNotFoundException;
+import com.publicissapient.movieticketbooking.dto.UserDto;
 import com.publicissapient.movieticketbooking.entity.User;
 import com.publicissapient.movieticketbooking.service.UserService;
+import jakarta.validation.Valid;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +21,13 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/")
-    public User addUser(@RequestBody User user){
-        User newUser = userService.create(user);
+    public User addUser(@RequestBody @Valid UserDto userDto){
+        User newUser = userService.create(userDto);
         return  newUser;
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable String id){
+    public User getUser(@PathVariable String id) throws UserNotFoundException {
         return  userService.findById(UUID.fromString(id));
     }
 
