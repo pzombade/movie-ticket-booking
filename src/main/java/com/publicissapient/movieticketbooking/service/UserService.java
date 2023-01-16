@@ -1,7 +1,7 @@
 package com.publicissapient.movieticketbooking.service;
 
 
-import com.publicissapient.movieticketbooking.UserNotFoundException;
+import com.publicissapient.movieticketbooking.exception.UserNotFoundException;
 import com.publicissapient.movieticketbooking.dto.UserDto;
 import com.publicissapient.movieticketbooking.entity.User;
 import com.publicissapient.movieticketbooking.exception.UserNotFoundException;
@@ -58,9 +58,6 @@ public class UserService {
         return result;
     }
 
-    public User findById(UUID uuid){
-        return userRepository.findById(uuid).orElseThrow();
-    }
 
     public List<User> findAll(){
         return userRepository.findAll();

@@ -1,6 +1,6 @@
 package com.publicissapient.movieticketbooking.advice;
 
-import com.publicissapient.movieticketbooking.UserNotFoundException;
+import com.publicissapient.movieticketbooking.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

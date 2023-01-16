@@ -1,6 +1,6 @@
 package com.publicissapient.movieticketbooking.controller;
 
-import com.publicissapient.movieticketbooking.UserNotFoundException;
+
 import com.publicissapient.movieticketbooking.dto.UserDto;
 import com.publicissapient.movieticketbooking.entity.User;
 import com.publicissapient.movieticketbooking.exception.UserNotFoundException;
