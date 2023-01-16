@@ -1,6 +1,7 @@
 package com.publicissapient.movieticketbooking.controller;
 
 import com.publicissapient.movieticketbooking.entity.User;
+import com.publicissapient.movieticketbooking.exception.UserNotFoundException;
 import com.publicissapient.movieticketbooking.service.UserService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class UserController {
     public User addUser(@RequestBody User user){
         User newUser = userService.create(user);
         return  newUser;
+    }
+
+
+    @PostMapping("/login")
+    public boolean loginSucceeded(@RequestBody User user) throws UserNotFoundException {
+        return  userService.loginSucceeded(user.getUserName(),user.getHashedPassword());
     }
 
     @GetMapping("/{id}")

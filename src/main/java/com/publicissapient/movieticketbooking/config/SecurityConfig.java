@@ -1,15 +1,19 @@
 package com.publicissapient.movieticketbooking.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -21,20 +25,26 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@Slf4j
 public class SecurityConfig {
 
     @Autowired
     private Environment env;
 
     @Bean
+    public PasswordEncoder bcryptEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home","/api/user/").permitAll() // he / and /home paths are configured to not require any authentication. All other paths must be authenticated.
+                        .requestMatchers("api/hello/", "/api/hello/**").permitAll()
+                        .requestMatchers("api/**", "swagger-ui/**","/login","login").permitAll()
                         .anyRequest().authenticated()
                 )
-               .formLogin()
-                .and()
+                .formLogin().defaultSuccessUrl("/swagger-ui/index.html",true).and()
                 .cors().and().csrf().disable()
                 .logout((logout) -> logout.permitAll());
 
