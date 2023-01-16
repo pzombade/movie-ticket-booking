@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -59,6 +60,11 @@ public class ScreenShowController {
             return ResponseEntity.ok().body(t);
         }
 
+    }
+
+    @GetMapping("/running")
+    public List getRunningShows(@RequestParam String title, @RequestParam String zip){
+         return screenShowService.getRunningShows(title, zip);
     }
 
     @GetMapping("/")
