@@ -1,7 +1,6 @@
 package com.publicissapient.movieticketbooking.controller;
 
 import com.publicissapient.movieticketbooking.entity.Show;
-import com.publicissapient.movieticketbooking.entity.Theater;
 import com.publicissapient.movieticketbooking.service.ShowService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,36 +18,36 @@ public class ShowController {
     ShowService showService;
 
     @PostMapping("/")
-    public ResponseEntity<String> addShow(@RequestBody Show show){
+    public ResponseEntity<String> addShow(@RequestBody Show show) {
         Show newShow = showService.create(show);
-        return  ResponseEntity.status(201).body("Created " + newShow.getShowId());
+        return ResponseEntity.status(201).body("Created " + newShow.getShowId());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Show> getShow(@PathVariable String id){
+    public ResponseEntity<Show> getShow(@PathVariable String id) {
         Show t = showService.findById(UUID.fromString(id));
-        if(t == null){
-            return  ResponseEntity.status(404).body(null);
-        }else {
-            return  ResponseEntity.ok().body(t);
+        if (t == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok().body(t);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteShow(@PathVariable String id){
+    public ResponseEntity<String> deleteShow(@PathVariable String id) {
         Show t = showService.deleteById(UUID.fromString(id));
-        if(t== null){
-            return  ResponseEntity.status(404).body(id);
+        if (t == null) {
+            return ResponseEntity.status(404).body(id);
         } else {
             return ResponseEntity.ok().body(id);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Show> updateShow(@PathVariable String id, @RequestBody Show user){
-        Show t =  showService.updateById(UUID.fromString(id),user);
-        if(t== null){
-            return  ResponseEntity.status(404).body(null);
+    public ResponseEntity<Show> updateShow(@PathVariable String id, @RequestBody Show user) {
+        Show t = showService.updateById(UUID.fromString(id), user);
+        if (t == null) {
+            return ResponseEntity.status(404).body(null);
         } else {
             return ResponseEntity.ok().body(t);
         }
@@ -56,8 +55,8 @@ public class ShowController {
     }
 
     @GetMapping("/")
-    public List<Show> getAllShows(){
-        return  showService.findAll();
+    public List<Show> getAllShows() {
+        return showService.findAll();
     }
 
 }

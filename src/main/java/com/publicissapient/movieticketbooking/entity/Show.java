@@ -19,9 +19,10 @@ public class Show {
     private String title;
 
     private String language;
+    private Genere genere;
+
+    ;
 
     @Transient
-    public enum Genere { SCIFI, COMEDY, THRILLER, HORROR, DRAMA };
-
-    private Genere genere;
+    public enum Genere {SCIFI, COMEDY, THRILLER, HORROR, DRAMA}
 }

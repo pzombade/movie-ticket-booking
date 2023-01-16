@@ -19,43 +19,43 @@ public class BookingController {
     BookingService bookingService;
 
     @PostMapping("/")
-    public ResponseEntity<String> addBooking(@RequestBody Booking booking){
+    public ResponseEntity<String> addBooking(@RequestBody Booking booking) {
         Booking newBooking = bookingService.create(booking);
-        return  ResponseEntity.status(201).body("Created " + newBooking.getBookingId());
+        return ResponseEntity.status(201).body("Created " + newBooking.getBookingId());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Booking> getBooking(@PathVariable String id){
+    public ResponseEntity<Booking> getBooking(@PathVariable String id) {
         Booking t = bookingService.findById(UUID.fromString(id));
-        if(t == null){
-            return  ResponseEntity.status(404).body(null);
-        }else {
-            return  ResponseEntity.ok().body(t);
+        if (t == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok().body(t);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteBooking(@PathVariable String id){
+    public ResponseEntity<String> deleteBooking(@PathVariable String id) {
         Booking t = bookingService.deleteById(UUID.fromString(id));
-        if(t== null){
-         return  ResponseEntity.status(404).body(id);
+        if (t == null) {
+            return ResponseEntity.status(404).body(id);
         } else {
             return ResponseEntity.ok().body(id);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Booking> updateBooking(@PathVariable String id, @RequestBody Booking booking){
-        Booking t =  bookingService.updateById(UUID.fromString(id),booking);
-        if(t== null){
-            return  ResponseEntity.status(404).body(null);
+    public ResponseEntity<Booking> updateBooking(@PathVariable String id, @RequestBody Booking booking) {
+        Booking t = bookingService.updateById(UUID.fromString(id), booking);
+        if (t == null) {
+            return ResponseEntity.status(404).body(null);
         } else {
             return ResponseEntity.ok().body(t);
         }
     }
 
     @GetMapping("/")
-    public List<Booking> getAllBookings(){
-        return  bookingService.findAll();
+    public List<Booking> getAllBookings() {
+        return bookingService.findAll();
     }
 }

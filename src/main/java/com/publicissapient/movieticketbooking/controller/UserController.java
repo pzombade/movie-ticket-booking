@@ -22,43 +22,43 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/")
-    public User addUser(@RequestBody @Valid UserDto userDto){
+    public User addUser(@RequestBody @Valid UserDto userDto) {
         User newUser = userService.create(userDto);
-        return  newUser;
+        return newUser;
     }
 
 
     @PostMapping("/login")
     public boolean loginSucceeded(@RequestBody User user) throws UserNotFoundException {
-        return  userService.loginSucceeded(user.getUserName(),user.getHashedPassword());
+        return userService.loginSucceeded(user.getUserName(), user.getHashedPassword());
     }
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable String id) throws UserNotFoundException {
-        return  userService.findById(UUID.fromString(id));
+        return userService.findById(UUID.fromString(id));
     }
 
     @GetMapping("/upcoming/{userName}")
     public List getUpcomingShows(@PathVariable String userName) throws UserNotFoundException {
-        return  userService.getUpcomingShows(userName);
+        return userService.getUpcomingShows(userName);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable String id){
+    public String deleteUser(@PathVariable String id) {
         userService.deleteById(UUID.fromString(id));
-        return "Deleted "+ id;
+        return "Deleted " + id;
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable String id, @RequestBody User user){
-        return  userService.updateById(UUID.fromString(id),user);
+    public User updateUser(@PathVariable String id, @RequestBody User user) {
+        return userService.updateById(UUID.fromString(id), user);
 
 //        return "Deleted "+ id;
     }
 
     @GetMapping("/")
-    public List<User> getAllUsers(){
-        return  userService.findAll();
+    public List<User> getAllUsers() {
+        return userService.findAll();
     }
 
 }

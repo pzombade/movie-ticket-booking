@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @GetMapping("/")
-    public String sayHello(){
-        return  "Hello!";
+    public String sayHello() {
+        return "Hello!";
     }
 
     @GetMapping("/{name}")
-    public String sayHello(@PathVariable String name){
-        return  "Hello "+name+"!";
+    public String sayHello(@PathVariable String name) {
+        return "Hello " + name + "!";
     }
 
 }

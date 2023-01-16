@@ -16,17 +16,17 @@ public class ApplicationRestExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(UserNotFoundException.class)
-    public Map<String , String > userNotFound(UserNotFoundException ex){
-        Map<String , String> errMap = new HashMap<>();
-        errMap.put("errorMessage",ex.getMessage());
+    public Map<String, String> userNotFound(UserNotFoundException ex) {
+        Map<String, String> errMap = new HashMap<>();
+        errMap.put("errorMessage", ex.getMessage());
 
-        return  errMap;
+        return errMap;
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String,String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex){
-        Map<String,String> map = ex.getBindingResult().getFieldErrors().stream().collect(Collectors.toMap(fe -> fe.getField(), fe -> fe.getDefaultMessage()));
-        return  map;
+    public Map<String, String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        Map<String, String> map = ex.getBindingResult().getFieldErrors().stream().collect(Collectors.toMap(fe -> fe.getField(), fe -> fe.getDefaultMessage()));
+        return map;
     }
 }

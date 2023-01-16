@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ApplicationAdviceHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> userNotFound(String msg){
-        log.error("UserNotFoundException: "+ msg);
+    public ResponseEntity<String> userNotFound(String msg) {
+        log.error("UserNotFoundException: " + msg);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
     }
 }

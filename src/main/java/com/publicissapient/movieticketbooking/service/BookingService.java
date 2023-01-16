@@ -16,28 +16,28 @@ public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    public Booking create(Booking booking){
+    public Booking create(Booking booking) {
         return bookingRepository.save(booking);
     }
 
-    public Booking findById(UUID uuid){
+    public Booking findById(UUID uuid) {
         boolean theaterExists = bookingRepository.existsById(uuid);
-        if(theaterExists){
+        if (theaterExists) {
             return bookingRepository.findById(uuid).get();
-        }else{
+        } else {
             return null;
         }
     }
 
-    public List<Booking> findAll(){
+    public List<Booking> findAll() {
         return bookingRepository.findAll();
     }
 
-    public Booking deleteById(UUID uuid){
+    public Booking deleteById(UUID uuid) {
         Optional<Booking> theater = bookingRepository.findById(uuid);
         Booking result;
 
-        if(theater.isPresent()){
+        if (theater.isPresent()) {
             bookingRepository.deleteById(uuid);
             result = theater.get();
         } else {
@@ -46,8 +46,8 @@ public class BookingService {
         return result;
     }
 
-    public Booking updateById(UUID uuid,Booking booking){
-        if(bookingRepository.findById(uuid).isPresent()){
+    public Booking updateById(UUID uuid, Booking booking) {
+        if (bookingRepository.findById(uuid).isPresent()) {
             booking.setBookingId(uuid);
             bookingRepository.save(booking);
             return booking;

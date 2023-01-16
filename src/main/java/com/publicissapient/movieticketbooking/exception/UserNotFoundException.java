@@ -1,7 +1,7 @@
 package com.publicissapient.movieticketbooking.exception;
 
 public class UserNotFoundException extends Exception {
-    public UserNotFoundException(String message){
+    public UserNotFoundException(String message) {
         super(message);
     }
 }
