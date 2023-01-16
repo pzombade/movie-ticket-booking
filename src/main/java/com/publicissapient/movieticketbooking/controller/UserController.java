@@ -38,6 +38,11 @@ public class UserController {
         return  userService.findById(UUID.fromString(id));
     }
 
+    @GetMapping("/upcoming/{userName}")
+    public List getUpcomingShows(@PathVariable String userName) throws UserNotFoundException {
+        return  userService.getUpcomingShows(userName);
+    }
+
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable String id){
         userService.deleteById(UUID.fromString(id));

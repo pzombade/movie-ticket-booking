@@ -21,6 +21,10 @@ public class ScreenShowService {
     @Autowired
     private ScreenShowRepository screenShowRepository;
 
+
+    @PersistenceContext
+    private EntityManager em;
+
     public ScreenShow create(ScreenShow show){
 //        Optional<ScreenShow> theaterExists = screenShowRepository.findById(show.getScreenShowId());
 //        if(theaterExists.isPresent()){
@@ -91,6 +95,4 @@ public class ScreenShowService {
         return result;
     }
 
-    @PersistenceContext
-    private EntityManager em;
 }

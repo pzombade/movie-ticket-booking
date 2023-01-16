@@ -63,7 +63,7 @@ select ss.*, sh.*, sc.*, t.* from public.screen_show ss
 		inner join screen sc on sc.screen_id = ss.screen_id
 		inner join theater t on t.theater_id = sc.theater_id 		
 		and ss.show_date_time > NOW()
-		and sh.title like 'Titanic'
+		and sh.title like '%'
 		
 select ss.*, sh.*, sc.*, t.*,b.*, u.* from public.screen_show ss
 		inner join show sh on sh.show_id = ss.show_id 
@@ -71,7 +71,16 @@ select ss.*, sh.*, sc.*, t.*,b.*, u.* from public.screen_show ss
 		inner join theater t on t.theater_id = sc.theater_id 
 		inner join booking b on b.screen_show_id = ss.screen_show_id
 		inner join user_entity u on u.id = b.user_id
-		
+		where u.user_name like 'Charlie'
+
+-- Users upcoming movies		
+select u.user_name, ss.show_date_time, sh.title , t.name as theatername,sc.name as screenname, b.seats_booked from public.screen_show ss
+		inner join show sh on sh.show_id = ss.show_id 
+		inner join screen sc on sc.screen_id = ss.screen_id
+		inner join theater t on t.theater_id = sc.theater_id 
+		inner join booking b on b.screen_show_id = ss.screen_show_id
+		inner join user_entity u on u.id = b.user_id
+		where u.user_name like 'Charlie'		
 						
 -- Queries for the submission
 select ss.*, sh.*, sc.*, t.* from public.screen_show ss
