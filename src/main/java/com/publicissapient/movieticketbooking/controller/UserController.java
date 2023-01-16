@@ -3,6 +3,7 @@ package com.publicissapient.movieticketbooking.controller;
 import com.publicissapient.movieticketbooking.UserNotFoundException;
 import com.publicissapient.movieticketbooking.dto.UserDto;
 import com.publicissapient.movieticketbooking.entity.User;
+import com.publicissapient.movieticketbooking.exception.UserNotFoundException;
 import com.publicissapient.movieticketbooking.service.UserService;
 import jakarta.validation.Valid;
 import lombok.Data;
@@ -24,6 +25,12 @@ public class UserController {
     public User addUser(@RequestBody @Valid UserDto userDto){
         User newUser = userService.create(userDto);
         return  newUser;
+    }
+
+
+    @PostMapping("/login")
+    public boolean loginSucceeded(@RequestBody User user) throws UserNotFoundException {
+        return  userService.loginSucceeded(user.getUserName(),user.getHashedPassword());
     }
 
     @GetMapping("/{id}")

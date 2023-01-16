@@ -44,9 +44,33 @@ select ss.*, sh.*, sc.*, t.* from public.screen_show ss
 		inner join show sh on sh.show_id = ss.show_id 
 		inner join screen sc on sc.screen_id = ss.screen_id
 		inner join theater t on t.theater_id = sc.theater_id 
-		where t.name not like 'PVR' 
+-- 		where t.name not like 'PVR' 
 -- -- 		and sc.name like 'PVR2' 
 -- -- 		and ss.show_date_time > NOW()
 -- 		and ss.show_date_time > NOW() 
--- -- 		and sh.genere = 4;				
-			
+-- -- 		and sh.genere = 4;	
+
+select ss.*, sh.*, sc.*, t.* from public.screen_show ss
+		inner join show sh on sh.show_id = ss.show_id 
+		inner join screen sc on sc.screen_id = ss.screen_id
+		inner join theater t on t.theater_id = sc.theater_id 
+		
+		
+select ss.*, sh.*, sc.*, t.*,b.*, u.* from public.screen_show ss
+		inner join show sh on sh.show_id = ss.show_id 
+		inner join screen sc on sc.screen_id = ss.screen_id
+		inner join theater t on t.theater_id = sc.theater_id 
+		inner join booking b on b.screen_show_id = ss.screen_show_id
+		inner join user_entity u on u.id = b.user_id
+		
+						
+-- Queries for the submission
+select ss.*, sh.*, sc.*, t.* from public.screen_show ss
+		inner join show sh on sh.show_id = ss.show_id 
+		inner join screen sc on sc.screen_id = ss.screen_id
+		inner join theater t on t.theater_id = sc.theater_id 
+		where ss.show_date_time > NOW() 
+		and t.zip = '111111'
+		and sh.title like 'Avtaar2'
+		and ss.show_date_time >= '2023-01-20'::date
+		AND ss.show_date_time < ('2023-01-20'::date + '1 day'::interval);
