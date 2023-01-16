@@ -1,6 +1,8 @@
 package com.publicissapient.movieticketbooking.service;
 
 
+import com.publicissapient.movieticketbooking.UserNotFoundException;
+import com.publicissapient.movieticketbooking.dto.UserDto;
 import com.publicissapient.movieticketbooking.entity.User;
 import com.publicissapient.movieticketbooking.exception.UserNotFoundException;
 import com.publicissapient.movieticketbooking.repository.UserRepository;
@@ -20,6 +22,22 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
+    public User create(UserDto userDto){
+        User user = User.builder()
+                .userName(userDto.getUserName())
+                .emailId(userDto.getEmailId())
+                .phone(userDto.getPhone())
+                .hashedPassword(userDto.getHashedPassword()) // TODO: Hash the password
+                .zip(userDto.getZip())
+                .build();
+        return userRepository.save(user);
+    }
+
+    public User findById(UUID uuid) throws UserNotFoundException {
+        return userRepository.findById(uuid).orElseThrow(()->new UserNotFoundException(uuid.toString()));
+    }
+    
     @Autowired
     private PasswordEncoder passwordEncoder;
 
